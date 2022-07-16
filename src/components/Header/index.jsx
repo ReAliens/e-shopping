@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../images/logo.png';
-import cart from '../../../images/cart.png';
-import currencyIcon from '../../../images/currency.png';
+import logo from '../../images/logo.png';
+import cart from '../../images/cart.png';
+import currencyIcon from '../../images/currency.png';
 import './index.css';
 
 class Header extends Component {
