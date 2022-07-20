@@ -1,22 +1,22 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
 import cart from '../../images/cart.png';
 import currencyIcon from '../../images/currency.png';
 import './index.css';
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
   render() {
     return (
       <div className="header-container">
         <nav className="nav-links">
-          <Link to="/"> All </Link>
-          <Link to="/tech"> Tech </Link>
-          <Link to="/clothes"> Clothes </Link>
+          <NavLink to="/"> All </NavLink>
+          <NavLink to="/techs"> Tech </NavLink>
+          <NavLink to="/clothes"> Clothes </NavLink>
         </nav>
-        <Link to="/" className="logo">
+        <NavLink to="/" className="logo">
           <img src={logo} alt="Logo" />
-        </Link>
+        </NavLink>
         <div className="cart-currency-container">
           <img src={currencyIcon} alt="currency-converter" className="icon" />
           <div className="cart-container">
