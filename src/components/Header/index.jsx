@@ -2,16 +2,25 @@ import { Component } from 'react';
 import logo from '../../images/logo.png';
 import cart from '../../images/cart.png';
 import currencyIcon from '../../images/currency.png';
+import vector from '../../images/vector.png';
 import './index.css';
 import { NavLink } from 'react-router-dom';
 import headerItems from '../../constants/headerItems';
 import { getCategoriesData } from '../../redux/actions/categories/categories';
 import { connect } from 'react-redux';
+import CurrancyDropdown from '../CurrancyDropdown';
+import { loadCurrencies } from '../../redux/actions/currencies/currencies';
 
 class Header extends Component {
   state = {
     category: 'all',
+    dropdownShow: false,
   };
+
+  componentDidMount() {
+    this.props.getCurrencies();
+  }
+
   render() {
     return (
       <div className="header-container">
@@ -22,7 +31,6 @@ class Header extends Component {
               to="/"
               onClick={() => {
                 this.setState({ category: item.category });
-                // this.props.changeCategory(item.category);
                 this.props.getCategoriesData(item.category);
               }}
               style={
@@ -39,7 +47,18 @@ class Header extends Component {
           <img src={logo} alt="Logo" />
         </NavLink>
         <div className="cart-currency-container">
-          <img src={currencyIcon} alt="currency-converter" className="icon" />
+          <div
+            className="icons-group"
+            onClick={() =>
+              this.setState({ dropdownShow: !this.state.dropdownShow })
+            }
+          >
+            <img src={currencyIcon} alt="currency-converter" className="icon" />
+            <img src={vector} alt="currency-converter" className="vector" />
+          </div>
+          {this.state.dropdownShow && (
+            <CurrancyDropdown options={this?.props?.currencies?.data} />
+          )}
           <div className="cart-container">
             <img src={cart} alt="cart" className="icon" />
           </div>
@@ -49,10 +68,17 @@ class Header extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    getCategoriesData: (category) => dispatch(getCategoriesData(category)),
+    currencies: state?.currencies,
   };
 };
 
-export default connect(null, mapDispatchToProps)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCategoriesData: (category) => dispatch(getCategoriesData(category)),
+    getCurrencies: () => dispatch(loadCurrencies()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

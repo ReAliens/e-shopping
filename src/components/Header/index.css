@@ -30,3 +30,10 @@
     width: 30px;
     height: 30px;
 }
+
+.icons-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
