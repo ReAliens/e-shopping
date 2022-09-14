@@ -1,8 +1,9 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import cartCircle from '../../images/cartCircle.png';
 import './index.css';
 
-export default class ProductCard extends Component {
+class ProductCard extends Component {
   render() {
     return (
       <div className="card-container">
@@ -12,8 +13,27 @@ export default class ProductCard extends Component {
           {this?.props?.stock && <p>OUT OF STOCK</p>}
         </div>
         <h5 className="product-title">{this.props.name}</h5>
-        <h5> {this.props.price}</h5>
+        <div>
+          <span>{this.props.currencies.defaultCurrency.symbol}</span>
+          <span>
+            {
+              this?.props?.prices?.find(
+                (price) =>
+                  price?.currency?.label ===
+                  this?.props?.currencies?.defaultCurrency?.label,
+              )?.amount
+            }
+          </span>
+        </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currencies: state?.currencies,
+  };
+};
+
+export default connect(mapStateToProps, null)(ProductCard);

@@ -11,9 +11,8 @@ class Home extends Component {
 
   render() {
     const categoryList = this.props.categories.listReducer.data;
-    console.log(categoryList);
     return (
-      <div className='page-container'>
+      <div className="page-container">
         <h2>{categoryList?.name?.replace(/./, (c) => c.toUpperCase())}</h2>
         <div className="container">
           {categoryList?.products?.map((item) => (
@@ -21,7 +20,7 @@ class Home extends Component {
               key={item?.id}
               image={item?.gallery[0]}
               name={item?.name}
-              price={item?.prices[0]?.amount}
+              prices={item?.prices}
               stock={item?.inStock}
             />
           ))}

@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import logo from '../../images/logo.png';
 import cart from '../../images/cart.png';
-import currencyIcon from '../../images/currency.png';
 import vector from '../../images/vector.png';
 import './index.css';
 import { NavLink } from 'react-router-dom';
@@ -53,11 +52,16 @@ class Header extends Component {
               this.setState({ dropdownShow: !this.state.dropdownShow })
             }
           >
-            <img src={currencyIcon} alt="currency-converter" className="icon" />
+            {/* <img src={currencyIcon} alt="currency-converter" className="icon" /> */}
+            <span>{this.props.currencies.defaultCurrency.symbol}</span>
             <img src={vector} alt="currency-converter" className="vector" />
           </div>
           {this.state.dropdownShow && (
-            <CurrancyDropdown options={this?.props?.currencies?.data} />
+            <CurrancyDropdown
+              toggle={() =>
+                this.setState({ dropdownShow: !this.state.dropdownShow })
+              }
+            />
           )}
           <div className="cart-container">
             <img src={cart} alt="cart" className="icon" />

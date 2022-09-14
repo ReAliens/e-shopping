@@ -10,8 +10,8 @@ const initialState = {
   loading: false,
   error: null,
   defaultCurrency: {
-    label: '$',
-    symbol: 'USD',
+    symbol: '$',
+    label: 'USD',
   },
 };
 
