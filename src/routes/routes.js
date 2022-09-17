@@ -2,11 +2,8 @@ const routes = {
   home: {
     index: () => '/',
   },
-  techs: {
-    index: () => '/techs',
-  },
-  clothes: {
-    index: () => '/clothes',
+  productDetail: {
+    index: () => `/products/:id`,
   },
 };
 

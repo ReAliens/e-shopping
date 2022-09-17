@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import ProductCard from '../../components/ProductsCard';
 import { getCategoriesData } from '../../redux/actions/categories/categories';
+import './index.css';
 
 class Home extends Component {
   componentDidMount() {
@@ -8,9 +10,22 @@ class Home extends Component {
   }
 
   render() {
+    const categoryList = this.props.categories.listReducer.data;
     return (
-      <div>
-        <h1>Home</h1>
+      <div className="page-container">
+        <h2>{categoryList?.name?.replace(/./, (c) => c.toUpperCase())}</h2>
+        <div className="container">
+          {categoryList?.products?.map((item) => (
+            <ProductCard
+              key={item?.id}
+              id={item?.id}
+              image={item?.gallery[0]}
+              name={item?.name}
+              prices={item?.prices}
+              stock={item?.inStock}
+            />
+          ))}
+        </div>
       </div>
     );
   }
