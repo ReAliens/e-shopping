@@ -18,6 +18,7 @@ class Home extends Component {
           {categoryList?.products?.map((item) => (
             <ProductCard
               key={item?.id}
+              id={item?.id}
               image={item?.gallery[0]}
               name={item?.name}
               prices={item?.prices}
